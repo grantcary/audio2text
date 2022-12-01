@@ -43,7 +43,7 @@ def encode_audio(model):
 def save_transcription(title, data):
   print("Saving...")
   df = pd.DataFrame(data)
-  df.to_csv(f'transcriptions/{title}.csv', index=False)
+  df.to_csv(f'{title}.csv', index=False)
 
 
 if __name__ == "__main__":
