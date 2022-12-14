@@ -2,6 +2,7 @@ from utils import timer, format_timestamp, illegal_chars, path_reformat
 from pytube import YouTube
 import whisper as wp
 import pandas as pd
+import srt
 
 from os.path import expanduser
 import argparse
@@ -31,12 +32,13 @@ def transcribe_audio(model_size):
   # removes audio file
   os.remove("audio.webm")
 
-  data = {'timestamp': [], 'text': []}
+  data = {'start': [], 'end':[], 'subtitle': []}
 
   # add timestamp/text phrase pairs to data dictionary
   for seg in result["segments"]:
-    data['timestamp'].append(format_timestamp(seg['start']))
-    data['text'].append(seg['text'])
+    data['start'].append(format_timestamp(seg['start']))
+    data['end'].append(format_timestamp(seg['end']))
+    data['subtitle'].append(seg['text'])
 
   return data
 
@@ -53,6 +55,23 @@ def save_transcription(title, data, out):
   print(f"    Saved to: {out}")
 
 
+def compose_srt(data):
+  subtitles = []
+  for i, sub in enumerate(data['subtitle']):
+    sub_start = srt.srt_timestamp_to_timedelta(data['start'][i])
+    sub_end = srt.srt_timestamp_to_timedelta(data['end'][i])
+    subtitles.append(srt.Subtitle(index=i, start=sub_start, end=sub_end, content=sub))
+  return srt.compose(subtitles)
+
+
+def save_srt(data, out):
+  srt_string = compose_srt(data)
+
+  out = f'{path_reformat(out)}/{title}.srt'
+  with open(out, 'w') as srt_file:
+    srt_file.writelines(srt_string)
+
+
 if __name__ == "__main__":
   home = f'{path_reformat(expanduser("~"))}/Desktop'
 
@@ -65,5 +84,6 @@ if __name__ == "__main__":
   title = download_audio(args.url)
   data = transcribe_audio(args.model)
   save_transcription(title, data, args.out)
+  save_srt(data, args.out)
   
   print("Done!")

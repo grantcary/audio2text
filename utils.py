@@ -23,4 +23,4 @@ def illegal_chars(title):
 def format_timestamp(num):
   ts = datetime.fromtimestamp(num)
   norm = datetime(1969, 12, 31, 16, 0, 0)
-  return ((datetime.min+(ts-norm)).time()).strftime('%H:%M:%S.%f')[:-3]
+  return ((datetime.min+(ts-norm)).time()).strftime('%H:%M:%S,%f')[:-3]
