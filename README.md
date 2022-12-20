@@ -1,6 +1,21 @@
 ### YouTube Audio to Subtitles
 Terminal based YouTube audio transcriber using [Whisper](https://github.com/openai/whisper)!
+
+## Setup
 ```
-python3 transcribe.py --url "https://youtu.be/x7X9w_GIm1s" --model "base" --out "/home/user/Desktop"
+git clone https://github.com/grantcary/youwhisp.git
+cd youwhisp
+pip3 install -r requirements.txt
 ```
-Outputs an subtitle file (.srt)
+It also requires Whisper to be installed. Refer to OpenAI's Whisper documentation on the [installation process](https://github.com/openai/whisper).
+
+## Command-line usage
+```
+usage: python3 transcribe.py [--url] [--model] [--format] [--out]
+
+options:
+    --url         # any valid youtube url
+    --model       # tiny, base, small, medium, large-v1, large-v2, large
+    --format      # src, csv
+    --out         # any valid folder path
+```

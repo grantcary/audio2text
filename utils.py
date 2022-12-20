@@ -1,15 +1,6 @@
 from datetime import datetime
 from time import time
 
-# function timer
-def timer(func):
-  def wrapper(*args, **kwargs):
-    st = time()
-    result = func(*args, **kwargs)
-    print(f'    {func.__name__!r} executed in {(time()-st):.2f}s')
-    return result
-  return wrapper
-
 # safeguard for windows users
 def path_reformat(path: str) -> str: return path.replace('\\', '/')
 
