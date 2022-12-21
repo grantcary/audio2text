@@ -1,6 +1,7 @@
 from datetime import datetime
 from time import time
 
+
 # safeguard for windows users
 def path_reformat(path: str) -> str: return path.replace('\\', '/')
 

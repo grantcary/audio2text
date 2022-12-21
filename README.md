@@ -19,3 +19,17 @@ options:
     --format      # src, csv
     --out         # any valid folder path
 ```
+
+## Convert file type
+```
+usage: python3 convert.py example.csv
+
+options:
+    --file (req)  # any file path with valid file extensions [.srt, .csv]
+    --out         # any valid folder path
+
+conversion logic:
+    Input         Output
+    .csv          .srt
+    .srt          .csv
+```
