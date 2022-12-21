@@ -22,7 +22,7 @@ options:
 
 ## Convert file type
 ```
-usage: python3 convert.py example.csv
+usage: python3 convert.py [--file] [--out]
 
 options:
     --file (req)  # any file path with valid file extensions [.srt, .csv]
