@@ -1,4 +1,4 @@
-### YouTube Audio to Subtitles
+# YouTube Audio to Subtitles
 Command-line based YouTube audio transcriber using [Whisper](https://github.com/openai/whisper)!
 
 ## Setup
